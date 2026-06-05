@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getFileConfigAddr } from "@/hooks/useFileManager";
-import { INSTANCE_TYPE_TRANSLATION, TYPE_MINECRAFT_BUNGEECORD } from "@/hooks/useInstance";
+import { INSTANCE_TYPE_TRANSLATION, TYPE_MINECRAFT_BUNGEECORD, TYPE_STEAM_SERVER_UNIVERSAL } from "@/hooks/useInstance";
 import { QUICKSTART_ACTION_TYPE, QUICKSTART_METHOD } from "@/hooks/widgets/quickStartFlow";
 import { t } from "@/lang/i18n";
 import { createInstance as createInstanceApi, uploadAddress } from "@/services/apis/instance";
@@ -194,6 +194,48 @@ const {
   execute: executeCreateInstance,
   isLoading: createInstanceLoading
 } = createInstanceApi();
+
+const fetchingSteam = ref(false);
+const steamAppOptions = ref<{ value: string; label: string }[]>([]);
+let fetchSteamTimeout: any;
+
+const handleSteamSearch = (val: string) => {
+  if (fetchSteamTimeout) clearTimeout(fetchSteamTimeout);
+  if (!val) {
+    steamAppOptions.value = [];
+    return;
+  }
+  fetchSteamTimeout = setTimeout(() => {
+    fetchingSteam.value = true;
+    fetch(`https://api.steampowered.com/IStoreQueryService/SearchSuggestions/v1/?input_json=${encodeURIComponent(JSON.stringify({
+      search_term: val,
+      context: { language: "english" },
+      data_request: { include_basic_info: true }
+    }))}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.response && data.response.store_items) {
+          steamAppOptions.value = data.response.store_items.map((item: any) => ({
+            value: String(item.appid),
+            label: `${item.name} (App ID: ${item.appid})`
+          }));
+        } else {
+          steamAppOptions.value = [];
+        }
+      })
+      .catch((err) => {
+        console.error("Steam API Error:", err);
+      })
+      .finally(() => {
+        fetchingSteam.value = false;
+      });
+  }, 500);
+};
+
+const handleSteamAppSelect = (val: string) => {
+  formData.updateCommand = `steamcmd.exe +force_install_dir "{mcsm_workspace}" +login anonymous "+app_update ${val} validate" +quit`;
+};
+
 const createInstance = async () => {
   try {
     if (!formData.cwd) formData.cwd = ".";
@@ -366,8 +408,32 @@ const createInstance = async () => {
         </a-input-group>
       </a-form-item>
 
+      <a-form-item v-if="formData.type === TYPE_STEAM_SERVER_UNIVERSAL">
+        <a-typography-title :level="5">{{ t("TXT_CODE_3d7fbe30") }}</a-typography-title>
+        <a-typography-paragraph>
+          <a-typography-text type="secondary" class="typography-text-ellipsis">
+            Search Steam to auto-fill the Update Command with the correct App ID.
+          </a-typography-text>
+        </a-typography-paragraph>
+        <a-select
+          show-search
+          :placeholder="'Search Steam...'"
+          :default-active-first-option="false"
+          :show-arrow="false"
+          :filter-option="false"
+          :not-found-content="fetchingSteam ? undefined : null"
+          :options="steamAppOptions"
+          @search="handleSteamSearch"
+          @change="handleSteamAppSelect"
+        >
+          <template #notFoundContent>
+            <a-spin v-if="fetchingSteam" size="small" />
+          </template>
+        </a-select>
+      </a-form-item>
+
       <a-form-item>
-        <!-- Update Command -->
+
         <a-typography-title :level="5">{{ t("TXT_CODE_2e2c6b7b") }}</a-typography-title>
         <a-typography-paragraph>
           <a-typography-text type="secondary" class="typography-text-ellipsis">
