@@ -1,5 +1,5 @@
 {
-  "name": "mcsmanager-workspace",
+  "name": "pondmanager-workspace",
   "version": "1.0.0",
   "scripts": {
     "daemon": "cd daemon &&  npm run dev",
