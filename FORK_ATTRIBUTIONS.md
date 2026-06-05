@@ -7,5 +7,7 @@ All original copyright notices, licence terms, and attribution from MCSManager a
 ## Changes made in this fork
 
 - The fork is published as **PondManager** instead of **MCSManager**.
-- The root workspace package name in `/tmp/workspace/thehairy/PondManager/package.json` was changed from `mcsmanager-workspace` to `pondmanager-workspace`.
-- `/tmp/workspace/thehairy/PondManager/.github/copilot-instructions.md` was added to provide repository-specific instructions for GitHub Copilot.
+- The root workspace package name in `PondManager/package.json` was changed from `mcsmanager-workspace` to `pondmanager-workspace`.
+- The daemon package name in `PondManager/daemon/package.json` was changed from `mcsmanager-daemon` to `pondmanager-daemon`.
+- The daemon package name in `PondManager/panel/package.json` was changed from `mcsmanager-panel` to `pondmanager-panel`.
+- `PondManager/.github/copilot-instructions.md` was added to provide repository-specific instructions for GitHub Copilot.
