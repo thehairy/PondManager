@@ -209,7 +209,7 @@ const handleSteamSearch = (val: string) => {
   }
   fetchSteamTimeout = setTimeout(() => {
     fetchingSteam.value = true;
-    fetch(`https://api.steampowered.com/IStoreQueryService/SearchSuggestions/v1/?input_json=${encodeURIComponent(JSON.stringify({
+    fetch(`https://api.steampowered.com/IStoreQueryService/SearchSuggestions/v1/?access_token=1.5.79J27FSnj3nRojeamhMhMvhl9Uuk&input_json=${encodeURIComponent(JSON.stringify({
       search_term: val,
       context: { language: "english" },
       data_request: { include_basic_info: true }
