@@ -414,12 +414,12 @@ const createInstance = async () => {
         <a-typography-title :level="5">{{ t("TXT_CODE_3d7fbe30") }}</a-typography-title>
         <a-typography-paragraph>
           <a-typography-text type="secondary" class="typography-text-ellipsis">
-            Search Steam to auto-fill the Update Command with the correct App ID.
+            {{ $t("TXT_CODE_STEAM_SEARCH") || "Search Steam to auto-fill the Update Command with the correct App ID." }}
           </a-typography-text>
         </a-typography-paragraph>
         <a-select
           show-search
-          :placeholder="'Search Steam...'"
+          :placeholder="$t('TXT_CODE_STEAM_SEARCH_PLACEHOLDER') || 'Search Steam...'"
           :default-active-first-option="false"
           :show-arrow="false"
           :filter-option="false"
