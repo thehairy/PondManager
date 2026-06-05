@@ -195,9 +195,11 @@ const {
   isLoading: createInstanceLoading
 } = createInstanceApi();
 
+
+
 const fetchingSteam = ref(false);
 const steamAppOptions = ref<{ value: string; label: string }[]>([]);
-let fetchSteamTimeout: any;
+let fetchSteamTimeout: ReturnType<typeof setTimeout> | undefined;
 
 const handleSteamSearch = (val: string) => {
   if (fetchSteamTimeout) clearTimeout(fetchSteamTimeout);
@@ -232,7 +234,7 @@ const handleSteamSearch = (val: string) => {
   }, 500);
 };
 
-const handleSteamAppSelect = (val: string) => {
+const handleSteamAppSelect = (val: any) => {
   formData.updateCommand = `steamcmd.exe +force_install_dir "{mcsm_workspace}" +login anonymous "+app_update ${val} validate" +quit`;
 };
 
