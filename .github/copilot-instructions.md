@@ -2,12 +2,9 @@
 
 ## Fork Attribution
 
-This project (**PondManager**) is a fork of [MCSManager](https://github.com/MCSManager/MCSManager), licensed under the [Apache License 2.0](../LICENSE). In accordance with that licence, the following changes have been made to the original work:
+This project (**PondManager**) is a fork of [MCSManager](https://github.com/MCSManager/MCSManager), licensed under the [Apache License 2.0](../LICENSE).
 
-- Repository renamed from **MCSManager** to **PondManager**.
-- `package.json` updated to reflect the fork identity.
-- `.cursor/rules/` added: project-specific AI assistant guidelines (core conventions, backend standards, frontend standards).
-- `RULES.md` added: consolidated rules document for all AI assistants.
+All fork-specific attributions are maintained in `/tmp/workspace/thehairy/PondManager/FORK_ATTRIBUTIONS.md`.
 
 All original copyright notices, licence terms, and attribution from MCSManager are retained unmodified.
 
