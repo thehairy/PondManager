@@ -1,5 +1,5 @@
 {
-  "name": "mcsmanager-daemon",
+  "name": "pondmanager-daemon",
   "version": "4.16.2",
   "description": "Provides remote control capability for MCSManager to manage processes, scheduled tasks, I/O streams, and more",
   "scripts": {
