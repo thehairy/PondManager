@@ -4,7 +4,7 @@
 
 This project (**PondManager**) is a fork of [MCSManager](https://github.com/MCSManager/MCSManager), licensed under the [Apache License 2.0](../LICENSE).
 
-All fork-specific attributions are maintained in `/tmp/workspace/thehairy/PondManager/FORK_ATTRIBUTIONS.md`.
+All fork-specific attributions are maintained in `PondManager/FORK_ATTRIBUTIONS.md`.
 
 All original copyright notices, licence terms, and attribution from MCSManager are retained unmodified.
 
